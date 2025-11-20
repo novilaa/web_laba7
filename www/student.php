@@ -1,42 +1,26 @@
 <?php
+
 class Student {
-    private $db;
-    
-    public function __construct($db) {
-        $this->db = $db;
+    private $name;
+
+    public function __construct($name) {
+        $this->name = $name;
     }
-    
-    public function addStudent($name, $email, $course) {
-        // В реальном проекте здесь была бы вставка в БД
-        // Но для демонстрации просто возвращаем данные
-        return [
-            'id' => uniqid(),
-            'name' => $name,
-            'email' => $email,
-            'course' => $course,
-            'created_at' => date('Y-m-d H:i:s')
-        ];
+
+    public function save() {
+        file_put_contents("students.log", $this->name . PHP_EOL, FILE_APPEND);
     }
-    
-    public function processStudentData($data) {
-        // Симуляция обработки данных
-        sleep(2); // Имитация долгой обработки
-        
-        $logEntry = [
-            'student_id' => $data['id'],
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'course' => $data['course'],
-            'processed_at' => date('Y-m-d H:i:s'),
-            'status' => 'success'
-        ];
-        
-        // Записываем в лог
-        file_put_contents('processed_kafka.log', 
-            json_encode($logEntry) . PHP_EOL, 
-            FILE_APPEND | LOCK_EX
-        );
-        
-        return $logEntry;
+}
+<?php
+
+class Student {
+    private $name;
+
+    public function __construct($name) {
+        $this->name = $name;
+    }
+
+    public function save() {
+        file_put_contents("students.log", $this->name . PHP_EOL, FILE_APPEND);
     }
 }
