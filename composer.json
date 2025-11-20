@@ -1,5 +1,6 @@
 {
   "require": {
-    "nmred/kafka-php": "^0.2.0"
+    "php": ">=8.0",
+    "ext-rdkafka": "*"
   }
 }
